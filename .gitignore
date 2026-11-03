@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+# Virtual environments
+venv/
+.venv/
+
+# IDE / tooling
+.vscode/
+.idea/
+.ipynb_checkpoints/
+
+# Secrets
+.env
+.env.local
+
+# Generated outputs, logs, caches
+outputs/
+logs/
+
+# Non-essential: slide decks, weekly reports, exports, one-off helpers
+PRESENTATION*.md
+presentation*.md
+WEEKLY_REPORT_*.md
+PROJECT_SUMMARY.md
+nav_*.json
+forward_seed.json
+make_bundle.ps1
+diagnostics/diag_junior_pa_debug.py
+

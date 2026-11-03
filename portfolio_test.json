@@ -1,0 +1,19 @@
+{
+  "objective": "Mid-career professional, long-term growth with income and stability, 20-30 year horizon, moderate risk tolerance. Broadly diversified core portfolio with no strong sector or regional tilt - the aim is durable, well-rounded exposure rather than any single theme. Heavily weight large-cap quality: established, financially sound companies with sustainable earnings, reasonable valuations, and good long-term potential, judged on conventional fundamentals (profitability, balance-sheet strength, valuation, cash flow). Broad-market index exposure is the backbone; any holding should add genuine diversification rather than duplicate exposure already present, and non-core or redundant positions should be consolidated. Maintain a fixed-income and cash buffer for stability.",
+  "constraints": {
+    "max_single_position": 0.30,
+    "min_bond_weight": 0.10,
+    "min_cash": 0.05
+  },
+  "holdings": {
+    "SPY":  {"weight": 0.25, "type": "equity_fund"},
+    "VTI":  {"weight": 0.15, "type": "equity_fund"},
+    "VXUS": {"weight": 0.12, "type": "equity_fund"},
+    "AAPL": {"weight": 0.07, "type": "equity"},
+    "MSFT": {"weight": 0.06, "type": "equity"},
+    "BND":  {"weight": 0.20, "type": "bond_fund"},
+    "LQD":  {"weight": 0.05, "type": "bond_fund"},
+    "CASH": {"weight": 0.06, "type": "cash"},
+    "GLD":  {"weight": 0.04, "type": "alternative_fund"}
+  }
+}

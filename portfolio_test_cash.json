@@ -1,0 +1,17 @@
+{
+  "objective": "Recently retired educator, capital preservation with modest growth. Conservative risk tolerance, 10-15 year horizon. Seeking income-generating assets, inflation protection, and low volatility. Avoids individual stock concentration.",
+  "holdings": {
+    "VOO": {"weight": 0.00, "type": "equity_fund"},
+    "QQQ": {"weight": 0.00, "type": "equity_fund"},
+    "VWO": {"weight": 0.00, "type": "equity_fund"},
+    "VXUS": {"weight": 0.00, "type": "equity_fund"},
+    "TIP": {"weight": 0.00, "type": "bond_fund"},
+    "BND": {"weight": 0.00, "type": "bond_fund"},
+    "AGG": {"weight": 0.00, "type": "bond_fund"},
+    "GLD": {"weight": 0.00, "type": "alternative_fund"},
+    "IYR": {"weight": 0.00, "type": "alternative_fund"},
+    "DBC": {"weight": 0.00, "type": "alternative_fund"},
+    "CASH": {"weight": 1.00, "type": "cash"}
+  }
+}
+

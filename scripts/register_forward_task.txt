@@ -1,0 +1,67 @@
+Forward-test scheduled task — setup & operation (Windows Task Scheduler)
+========================================================================
+
+WHAT IT DOES
+  Runs scripts/run_forward.ps1 every weekday (Mon-Fri) at 23:00 LOCAL time
+  (= 11pm Eastern on this machine, which is on Eastern time). That script runs
+  all three portfolios for the day's weekday and appends to
+  outputs/forward/<portfolio>/<weekday>/. No paid API / no cloud involved — it
+  calls the project's Python against the free Ollama-cloud model.
+
+PREREQUISITES
+  - The machine must be AWAKE at 23:00 (a sleeping laptop won't run it; the
+    /create below sets it to wake the machine and to run a missed start ASAP).
+  - The task runs as YOU, so it inherits your .env (OLLAMA_API_KEY).
+
+------------------------------------------------------------------------
+1) REGISTER THE TASK  (run ONCE in a normal PowerShell — no admin needed for
+   a per-user task; admin only if you later want "run whether logged on or not")
+------------------------------------------------------------------------
+
+  schtasks /create /tn "agentic-forward" /sc weekly /d MON,TUE,WED,THU,FRI /st 23:00 /tr "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\Users\Gaurav\projects\agentic\scripts\run_forward.ps1\"" /rl LIMITED /f
+
+  Notes:
+   - /sc weekly /d MON..FRI /st 23:00  -> fire 11pm local on weekdays.
+   - 23:00 is LOCAL time; Windows handles EST/EDT automatically.
+   - /f overwrites an existing task of the same name (safe to re-run).
+
+  Then enable "wake to run" + "run a missed start" (not exposed by schtasks
+  /create, so set via PowerShell):
+
+    $t = Get-ScheduledTask -TaskName "agentic-forward"
+    $s = $t.Settings
+    $s.WakeToRun = $true
+    $s.StartWhenAvailable = $true            # run ASAP if a scheduled start was missed
+    $s.ExecutionTimeLimit = "PT2H"           # kill a hung run after 2h
+    Set-ScheduledTask -TaskName "agentic-forward" -Settings $s
+
+------------------------------------------------------------------------
+2) VERIFY
+------------------------------------------------------------------------
+  schtasks /query /tn "agentic-forward" /v /fo LIST      # show the task
+  Get-ScheduledTask -TaskName "agentic-forward"          # PowerShell view
+
+------------------------------------------------------------------------
+3) TEST-FIRE NOW (does a real run immediately — writes real track data)
+------------------------------------------------------------------------
+  schtasks /run /tn "agentic-forward"
+  # watch the newest log:
+  Get-Content (Get-ChildItem outputs\forward\_logs\*.log | Sort LastWriteTime | Select -Last 1).FullName -Wait
+
+------------------------------------------------------------------------
+4) OPERATE
+------------------------------------------------------------------------
+  Pause:    schtasks /change /tn "agentic-forward" /disable
+  Resume:   schtasks /change /tn "agentic-forward" /enable
+  Remove:   schtasks /delete /tn "agentic-forward" /f
+  Results:  outputs/forward/<portfolio>/<weekday>/history.jsonl  (+ reports/, snapshots/)
+  Logs:     outputs/forward/_logs/forward_<timestamp>.log
+  Scoreboard once a track has >=2 records:
+            python scoreboard_run.py --track outputs/forward/diversified/monday
+
+PORTFOLIOS / TRACKS
+  3 portfolios x 5 weekdays = 15 independent tracks:
+    diversified  -> portfolio_test.json
+    conservative -> portfolio_test_cash.json
+    concentrated -> portfolio_test_concentrated.json
+  Each weekday's run advances that weekday's track for all three portfolios.

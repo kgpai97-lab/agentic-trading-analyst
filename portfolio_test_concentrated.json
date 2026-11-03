@@ -1,0 +1,21 @@
+{
+  "objective": "Aggressive growth investor seeking maximum long-term returns with a very high risk tolerance and a long horizon. Strong technology and high-growth tilt, and open to aggressive alternative exposures (leveraged, thematic, crypto-adjacent, commodities). I hold a large, highly-appreciated NVDA position and want to STAY fully invested in growth assets - this is a maximize-returns book, not a de-risking-to-cash exercise. Reduce my reliance on any single name over time by spreading into other aggressive growth equities, high-octane funds, and alternatives, while keeping the book growth-first. I am tax-sensitive: strongly prefer gradual trims to a full exit, and avoid realizing the entire gain at once. A slow, deliberate diversification glide - out of one name, into many aggressive bets - is exactly what I want. Keep only a small bond and cash buffer.",
+  "constraints": {
+    "max_total_stock": 0.40
+  },
+  "holdings": {
+    "NVDA": {"weight": 0.80, "type": "equity"},
+    "AMD":  {"weight": 0.00, "type": "equity"},
+    "TSLA": {"weight": 0.00, "type": "equity"},
+    "PLTR": {"weight": 0.00, "type": "equity"},
+    "TQQQ": {"weight": 0.00, "type": "equity_fund"},
+    "SOXL": {"weight": 0.00, "type": "equity_fund"},
+    "ARKK": {"weight": 0.00, "type": "equity_fund"},
+    "QQQ":  {"weight": 0.00, "type": "equity_fund"},
+    "SPY":  {"weight": 0.00, "type": "equity_fund"},
+    "GLD":  {"weight": 0.00, "type": "alternative_fund"},
+    "BITO": {"weight": 0.00, "type": "alternative_fund"},
+    "BND":  {"weight": 0.00, "type": "bond_fund"},
+    "CASH": {"weight": 0.20, "type": "cash"}
+  }
+}

@@ -1,0 +1,13 @@
+langgraph
+langchain-ollama
+langchain-core
+python-dotenv
+pandas
+numpy
+scipy
+scikit-learn
+aiohttp
+langsmith
+pydantic
+yfinance
+pytest>=8
